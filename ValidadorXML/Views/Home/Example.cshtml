@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Validador XML";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="jumbotron">
+    <form action="~/Home/SaveDropzoneJsUploadedFiles" class="dropzone" id="dropzoneJsForm"></form>
+    <button id="submit-all">Submit All Files</button>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        Dropzone.options.dropzoneJsForm = {
+            acceptedFiles: ".xml",
+            //prevents Dropzone from uploading dropped files immediately
+            autoProcessQueue: false,
+            init: function () {
+                var submitButton = document.querySelector("#submit-all");
+                var myDropzone = this; //closure
+                submitButton.addEventListener("click", function () {
+
+                    //tell Dropzone to process all queued files
+                    myDropzone.processQueue();
+                });
+            }
+        };
+
+    </script>
+}
